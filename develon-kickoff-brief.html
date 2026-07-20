@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Develon — Pre-kick-off brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1d21; --paper:#f4f3ef; --panel:#ffffff; --line:#d9d6cf;
+    --accent:#e85d04; --accent-dark:#c24d03; --ok:#2f7d4f; --muted:#6b6f76;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',system-ui,sans-serif; font-size:15px; line-height:1.55;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 20px 80px;}
+
+  header.hero{border-bottom:3px solid var(--ink); padding:42px 0 26px; margin-bottom:8px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600;}
+  h1{font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(30px,5vw,44px); line-height:1.05; margin:10px 0 14px; letter-spacing:-.01em;}
+  .hero p{max-width:620px; color:var(--muted);}
+  .hero .meta{margin-top:18px; display:flex; gap:18px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink);}
+  .hero .meta span b{color:var(--accent);}
+
+  section{background:var(--panel); border:1px solid var(--line); border-radius:10px; margin:22px 0; padding:26px 28px; position:relative;}
+  section h2{font-family:'Archivo',sans-serif; font-weight:700; font-size:19px; display:flex; align-items:center; gap:12px; margin-bottom:4px;}
+  .tag{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; font-weight:600; padding:3px 8px; border-radius:4px; text-transform:uppercase;}
+  .tag.must{background:var(--accent); color:#fff;}
+  .tag.nice{background:#e9e7e1; color:var(--muted);}
+  section .why{font-size:13px; color:var(--muted); margin-bottom:18px;}
+
+  .field{margin:16px 0;}
+  .field label{display:block; font-weight:600; font-size:14px; margin-bottom:6px;}
+  .field .hint{font-weight:400; color:var(--muted); font-size:12.5px; display:block; margin-top:2px;}
+  input[type=text], textarea, select{
+    width:100%; border:1px solid var(--line); border-radius:6px; background:#fcfbf9;
+    padding:10px 12px; font-family:'Inter',sans-serif; font-size:14px; color:var(--ink);
+  }
+  textarea{min-height:64px; resize:vertical;}
+  input:focus, textarea:focus, select:focus, button:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+  .row{display:flex; gap:12px; flex-wrap:wrap;}
+  .row > *{flex:1; min-width:160px;}
+
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{border:1px solid var(--line); background:#fcfbf9; border-radius:999px; padding:7px 14px; font-size:13.5px; cursor:pointer; user-select:none; transition:all .12s;}
+  .chip.on{background:var(--ink); border-color:var(--ink); color:#fff;}
+
+  /* assumption cards */
+  .assume{border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:16px 18px; margin:14px 0; background:#fffdfa;}
+  .assume .a-head{display:flex; justify-content:space-between; gap:14px; align-items:flex-start; flex-wrap:wrap;}
+  .assume p.text{font-weight:600; font-size:14.5px; max-width:520px;}
+  .a-btns{display:flex; gap:8px; flex-shrink:0;}
+  .stamp{font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    border:1.5px solid var(--line); background:#fff; border-radius:5px; padding:7px 13px; cursor:pointer; color:var(--muted); transition:all .12s;}
+  .stamp.ok.on{border-color:var(--ok); color:var(--ok); background:#f0f7f2; transform:rotate(-1.5deg);}
+  .stamp.fix.on{border-color:var(--accent-dark); color:var(--accent-dark); background:#fdf1e7; transform:rotate(-1.5deg);}
+  .assume textarea{margin-top:12px; display:none;}
+  .assume textarea.show{display:block;}
+
+  .footerbar{margin-top:34px; border-top:3px solid var(--ink); padding-top:22px; display:flex; gap:14px; align-items:center; flex-wrap:wrap;}
+  .btn-main{font-family:'Archivo',sans-serif; font-weight:700; font-size:15px; background:var(--accent); color:#fff; border:none; border-radius:8px; padding:13px 22px; cursor:pointer;}
+  .btn-main:hover{background:var(--accent-dark);}
+  .footerbar .note{font-size:12.5px; color:var(--muted); max-width:420px;}
+  .toast{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ok); font-weight:600; opacity:0; transition:opacity .2s;}
+  .toast.show{opacity:1;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none!important;} html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Interní nástroj · lead-gen kampaně Evropa</div>
+  <h1>Develon — brief před kick-offem</h1>
+  <p>Prosíme o vyplnění před společným callem. Otázky odpovídají agendě kick-offu — co vyplníte předem, na callu jen potvrdíme a získáme víc času na diskuzi o strategii. Pole, která nevíte, klidně nechte prázdná.</p>
+  <div class="meta">
+    <span>KLIENT: <b>DEVELON EU</b></span>
+    <span>PŘIPRAVILA: VERONIKA (PM)</span>
+    <span>ODHAD VYPLNĚNÍ: 15 MIN</span>
+  </div>
+</header>
+
+<section>
+  <h2>1 · Cíle a definice úspěchu <span class="tag must">klíčové</span></h2>
+  <p class="why">Bez tohohle neumíme spočítat, kolik si můžeme dovolit za lead zaplatit.</p>
+  <div class="field">
+    <label>Co pro vás znamená „lead"? <span class="hint">Označte vše, co platí.</span></label>
+    <div class="chips" data-group="lead">
+      <div class="chip" tabindex="0">Odeslaná poptávka (Request a Quote)</div>
+      <div class="chip" tabindex="0">Žádost o demo</div>
+      <div class="chip" tabindex="0">Kontakt předaný dealerovi</div>
+      <div class="chip" tabindex="0">Stažení brožury</div>
+      <div class="chip" tabindex="0">Jiné</div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Cíl kampaně v číslech <span class="hint">Počet leadů, cílová cena za lead, nebo obchodní cíl.</span></label>
+    <input type="text" data-q="Cíl v číslech" placeholder="Např. 1 500 kvalitních leadů / rok">
+  </div>
+  <div class="field">
+    <label>Průměrná hodnota zakázky <span class="hint">Stačí řádově — pomůže nastavit ekonomiku kampaně.</span></label>
+    <input type="text" data-q="Průměrná hodnota zakázky" placeholder="Např. 120 000 EUR">
+  </div>
+</section>
+
+<section>
+  <h2>2 · Budget <span class="tag must">klíčové</span></h2>
+  <div class="row">
+    <div class="field">
+      <label>Částka a měna</label>
+      <input type="text" data-q="Budget" placeholder="Např. 5 000 000 EUR">
+    </div>
+    <div class="field">
+      <label>Na jaké období</label>
+      <select data-q="Období">
+        <option value="">— vyberte —</option>
+        <option>Jedna kampaň</option>
+        <option>Půl roku</option>
+        <option>Celý rok</option>
+        <option>Jiné</option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label>Co budget zahrnuje</label>
+    <select data-q="Budget zahrnuje">
+      <option value="">— vyberte —</option>
+      <option>Pouze média</option>
+      <option>Média + produkce kreativ</option>
+      <option>Média + produkce + fee agentury</option>
+      <option>Nevím / upřesníme</option>
+    </select>
+  </div>
+</section>
+
+<section>
+  <h2>3 · Trhy a jazyky <span class="tag must">klíčové</span></h2>
+  <div class="field">
+    <label>Prioritní země <span class="hint">Podle prodejů, potenciálu nebo síly dealerské sítě.</span></label>
+    <textarea data-q="Prioritní trhy" placeholder="Např. DE, FR, IT jako priorita 1…"></textarea>
+  </div>
+  <div class="field">
+    <label>Jazyky kampaní a překlady <span class="hint">Jedeme v 5 jazycích webu, nebo lokalizujeme dál? Kdo překlady zajišťuje?</span></label>
+    <textarea data-q="Jazyky a překlady"></textarea>
+  </div>
+</section>
+
+<section>
+  <h2>4 · Produkt <span class="tag must">klíčové</span></h2>
+  <div class="field">
+    <label>Které produktové kategorie mají prioritu?</label>
+    <textarea data-q="Prioritní kategorie" placeholder="Např. minibagry a nová řada…"></textarea>
+  </div>
+</section>
+
+<section>
+  <h2>5 · Měření a technika <span class="tag must">klíčové</span></h2>
+  <div class="field">
+    <label>Co je nasazené na webu a v pozadí <span class="hint">Označte vše, co platí.</span></label>
+    <div class="chips" data-group="mereni">
+      <div class="chip" tabindex="0">Google Analytics 4</div>
+      <div class="chip" tabindex="0">Google Tag Manager</div>
+      <div class="chip" tabindex="0">CRM (evidence leadů)</div>
+      <div class="chip" tabindex="0">Měření odeslaných formulářů</div>
+      <div class="chip" tabindex="0">Nevím jistě</div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Kam padají leady z webu a co se s nimi děje dál? <span class="hint">Kdo je zpracovává, jak rychle, a víme, které skončily obchodem?</span></label>
+    <textarea data-q="Cesta leadu"></textarea>
+  </div>
+  <div class="field">
+    <label>Reklamní účty a přístupy <span class="hint">Kdo vlastní účty Google / Meta / LinkedIn a k jakým historickým datům se dostaneme?</span></label>
+    <textarea data-q="Účty a přístupy"></textarea>
+  </div>
+</section>
+
+<section>
+  <h2>6 · Kontext a historie <span class="tag nice">doplňkové</span></h2>
+  <p class="why">Cokoli z tohohle nám ušetří slepé uličky — ale nic z toho neblokuje start.</p>
+  <div class="field"><label>Co běželo dřív a s jakým výsledkem?</label><textarea data-q="Historie kampaní"></textarea></div>
+  <div class="field"><label>Inzerují online i sami dealeři?</label><textarea data-q="Inzerce dealerů"></textarea></div>
+  <div class="field"><label>Fixní body v kalendáři <span class="hint">Veletrhy, uvedení nových strojů, sezónní špičky.</span></label><textarea data-q="Fixní body"></textarea></div>
+  <div class="field"><label>Hlavní konkurenti a náš argument proti nim</label><textarea data-q="Konkurence"></textarea></div>
+  <div class="field"><label>Reagují dealeři na leady v dohodnutém čase? Existuje pravidlo (např. do 24 h)?</label><textarea data-q="Reakce dealerů na leady"></textarea></div>
+</section>
+
+<section>
+  <h2>7 · Naše pracovní předpoklady <span class="tag must">potvrďte / opravte</span></h2>
+  <p class="why">Abychom mohli pracovat už teď, stanovili jsme si tyto předpoklady. Prosíme jen o razítko: platí, nebo opravit?</p>
+
+  <div class="assume" data-a="Budget = 5 mil. EUR na kampaň, pouze média">
+    <div class="a-head">
+      <p class="text">Budget = 5 mil. EUR na kampaň, pouze média.</p>
+      <div class="a-btns"><button class="stamp ok">✓ Platí</button><button class="stamp fix">✎ Opravit</button></div>
+    </div>
+    <textarea placeholder="Jak to je správně?"></textarea>
+  </div>
+
+  <div class="assume" data-a="Lead = odeslaná poptávka nebo žádost o demo">
+    <div class="a-head">
+      <p class="text">Lead = odeslaná poptávka (Request a Quote) nebo žádost o demo.</p>
+      <div class="a-btns"><button class="stamp ok">✓ Platí</button><button class="stamp fix">✎ Opravit</button></div>
+    </div>
+    <textarea placeholder="Jak to je správně?"></textarea>
+  </div>
+
+  <div class="assume" data-a="Prioritní trhy dle hustoty dealerské sítě: DE, IT, FR, UK">
+    <div class="a-head">
+      <p class="text">Prioritní trhy podle hustoty vaší dealerské sítě: Německo, Itálie, Francie, UK.</p>
+      <div class="a-btns"><button class="stamp ok">✓ Platí</button><button class="stamp fix">✎ Opravit</button></div>
+    </div>
+    <textarea placeholder="Jak to je správně?"></textarea>
+  </div>
+
+  <div class="assume" data-a="Cíl: maximum kvalitních leadů při udržitelné ceně + podpora znalosti značky">
+    <div class="a-head">
+      <p class="text">Cíl: maximum kvalitních leadů při udržitelné ceně za lead + podpora znalosti značky Develon.</p>
+      <div class="a-btns"><button class="stamp ok">✓ Platí</button><button class="stamp fix">✎ Opravit</button></div>
+    </div>
+    <textarea placeholder="Jak to je správně?"></textarea>
+  </div>
+</section>
+
+<div class="footerbar">
+  <button class="btn-main" id="copyBtn">Zkopírovat souhrn odpovědí</button>
+  <span class="toast" id="toast">Zkopírováno — vložte do e-mailu.</span>
+  <span class="note">Stránka nikam nic neodesílá ani neukládá. Po vyplnění zkopírujte souhrn a pošlete nám ho e-mailem — na kick-offu z něj vyjdeme.</span>
+</div>
+
+</div>
+<script>
+  // chips toggle
+  document.querySelectorAll('.chip').forEach(ch=>{
+    const t=()=>ch.classList.toggle('on');
+    ch.addEventListener('click',t);
+    ch.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t();}});
+  });
+  // assumption stamps
+  document.querySelectorAll('.assume').forEach(a=>{
+    const ok=a.querySelector('.stamp.ok'), fix=a.querySelector('.stamp.fix'), ta=a.querySelector('textarea');
+    ok.addEventListener('click',()=>{ok.classList.toggle('on'); if(ok.classList.contains('on')){fix.classList.remove('on'); ta.classList.remove('show');}});
+    fix.addEventListener('click',()=>{fix.classList.toggle('on'); if(fix.classList.contains('on')){ok.classList.remove('on'); ta.classList.add('show'); ta.focus();} else {ta.classList.remove('show');}});
+  });
+  // summary
+  document.getElementById('copyBtn').addEventListener('click',async()=>{
+    let out=['DEVELON — BRIEF PŘED KICK-OFFEM','================================',''];
+    document.querySelectorAll('[data-group]').forEach(g=>{
+      const on=[...g.querySelectorAll('.chip.on')].map(c=>c.textContent.trim());
+      const label=g.closest('.field').querySelector('label').childNodes[0].textContent.trim();
+      out.push(label+' '+(on.length?on.join('; '):'—'));
+    });
+    document.querySelectorAll('[data-q]').forEach(el=>{
+      out.push(el.dataset.q+': '+(el.value.trim()||'—'));
+    });
+    out.push('','PRACOVNÍ PŘEDPOKLADY:');
+    document.querySelectorAll('.assume').forEach(a=>{
+      const ok=a.querySelector('.stamp.ok').classList.contains('on');
+      const fix=a.querySelector('.stamp.fix').classList.contains('on');
+      const corr=a.querySelector('textarea').value.trim();
+      let st = ok ? 'PLATÍ' : (fix ? ('OPRAVIT → '+(corr||'(bez upřesnění)')) : 'nevyjádřeno');
+      out.push('• '+a.dataset.a+' — '+st);
+    });
+    const text=out.join('\n');
+    try{ await navigator.clipboard.writeText(text); }
+    catch(e){ const t=document.createElement('textarea'); t.value=text; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+    const toast=document.getElementById('toast'); toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),2500);
+  });
+</script>
+</body>
+</html>
